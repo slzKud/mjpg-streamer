@@ -1,0 +1,12 @@
+find_package(PkgConfig)
+if (PKG_CONFIG_FOUND)
+	pkg_check_modules(NeatVNC neatvnc)
+else()
+	find_path(NeatVNC_INCLUDE_DIRS NAMES neatvnc.h)
+	find_library(NeatVNC_LIBRARIES NAMES neatvnc)
+	find_package_handle_standard_args(NeatVNC DEFAULT_MSG NeatVNC_LIBRARIES NeatVNC_INCLUDE_DIRS)
+endif()
+
+if(NeatVNC_FIND_REQUIRED AND NOT NeatVNC_FOUND)
+	message(FATAL_ERROR "Could not find NeatVNC")
+endif()

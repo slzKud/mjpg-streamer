@@ -1,0 +1,12 @@
+find_package(PkgConfig)
+if (PKG_CONFIG_FOUND)
+	pkg_check_modules(AML aml)
+else()
+	find_path(AML_INCLUDE_DIRS NAMES aml.h)
+	find_library(AML_LIBRARIES NAMES aml)
+	find_package_handle_standard_args(PIXMAN DEFAULT_MSG AML_LIBRARIES AML_INCLUDE_DIRS)
+endif()
+
+if(AML_FIND_REQUIRED AND NOT AML_FOUND)
+	message(FATAL_ERROR "Could not find AML")
+endif()
